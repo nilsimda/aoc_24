@@ -17,19 +17,9 @@ int process_string(string str) {
   return res;
 }
 
-int part1(char *filename) {
-  ifstream f(filename);
-  stringstream buffer;
-  buffer << f.rdbuf();
-  string program = buffer.str();
-  return process_string(program);
-}
+int part1(string program) { return process_string(program); }
 
-int part2(char *filename) {
-  ifstream f(filename);
-  stringstream buffer;
-  buffer << f.rdbuf();
-  string program = buffer.str();
+int part2(string program) {
   int res = 0;
   bool enabled = true;
   size_t start_pos = 0;
@@ -47,7 +37,10 @@ int part2(char *filename) {
 }
 
 int main(int argc, char **argv) {
-  cout << "Part 1: " << part1(argv[1]) << endl;
-  cout << "Part 2: " << part2(argv[1]) << endl;
+  ifstream f(argv[1]);
+  stringstream program;
+  program << f.rdbuf();
+  cout << "Part 1: " << part1(program.str()) << endl;
+  cout << "Part 2: " << part2(program.str()) << endl;
   return 0;
 }
